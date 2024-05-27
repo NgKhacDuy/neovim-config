@@ -126,13 +126,29 @@ return packer.startup(function(use)
 			{ "nvim-tree/nvim-web-devicons" },
 		},
 	})
-	
+
 	-- codeium
 	use({
 		"Exafunction/codeium.nvim",
 		requires = {
 			{ "nvim-lua/plenary.nvim" },
 			{ "hrsh7th/nvim-cmp" },
+		},
+	})
+
+	-- action preview
+	use({
+		"aznhe21/actions-preview.nvim",
+		config = function()
+			vim.keymap.set({ "v", "n" }, "gf", require("actions-preview").code_actions)
+		end,
+	})
+
+	use({
+		"akinsho/flutter-tools.nvim",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"stevearc/dressing.nvim", -- optional dep
 		},
 	})
 
