@@ -3,6 +3,13 @@ vim.g.mapleader = " "
 
 local keymap = vim.keymap -- for conciseness
 
+local function save_and_format()
+-- Format the file using LSP
+  vim.lsp.buf.format({ async = true })
+  -- Save the file
+  vim.cmd(':w')
+end
+
 ---------------------
 -- General Keymaps
 ---------------------
@@ -31,6 +38,11 @@ keymap.set("n", "<leader>tx", ":tabclose<CR>") -- close current tab
 keymap.set("n", "<leader>tn", ":tabn<CR>") --  go to next tab
 keymap.set("n", "<leader>tp", ":tabp<CR>") --  go to previous tab
 
+-- save file shortcut
+-- keymap.set("n", "<C-s>", ":w<CR>")
+
+vim.keymap.set('n', '<C-s>', save_and_format)
+
 ----------------------
 -- Plugin Keybinds
 ----------------------
@@ -56,3 +68,5 @@ keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<cr>") -- list current c
 
 -- restart lsp server (not on youtube nvim video)
 keymap.set("n", "<leader>rs", ":LspRestart<CR>") -- mapping to restart lsp if necessary
+
+keymap.set("n", "<leader>pr", function() vim.lsp.buf.format { async = true } end)
